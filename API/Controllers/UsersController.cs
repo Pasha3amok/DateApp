@@ -16,7 +16,7 @@ public class UsersController(DataContext context) : ControllerBase
 	{
 		var users = await context.Users.ToListAsync();
 
-		return Ok(users);
+		return users;
 	}
 
 	[HttpGet("{id:int}")] // /api/users/id
@@ -26,6 +26,6 @@ public class UsersController(DataContext context) : ControllerBase
 
 		if (user == null) return NotFound();
 
-		return Ok(user);
+		return user;
 	}
 }
