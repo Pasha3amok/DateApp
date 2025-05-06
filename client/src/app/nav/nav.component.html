@@ -1,0 +1,103 @@
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      SimpleDate
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarTogglerDemo02"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link">Matches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Messages</a>
+        </li>
+      </ul>
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="login()"
+        class="d-flex"
+      >
+        <input
+          name="username"
+          [(ngModel)]="loginModel.username"
+          class="form-control me-2"
+          placeholder="Username"
+        />
+        <input
+          name="username"
+          [(ngModel)]="loginModel.password"
+          class="form-control me-2"
+          placeholder="Password"
+          type="password"
+        />
+        <button
+          class="btn btn-outline-success"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div
+  class="collapse"
+  id="navbarToggleExternalContent"
+  data-bs-theme="dark"
+>
+  <div class="bg-dark p-4">
+    <h5 class="text-body-emphasis h4">
+      Collapsed content
+    </h5>
+    <span class="text-body-secondary">
+      Toggleable via the navbar brand.
+    </span>
+  </div>
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarToggleExternalContent"
+      aria-controls="navbarToggleExternalContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</div>
+<div *ngIf="errorMessage != ''" class="alert alert-danger d-flex align-items-center justify-content-between" role="alert">
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div class="flex-grow-1">
+    {{ errorMessage }}
+  </div>
+  <button type="button" class="btn-close" (click)="clearErrorMessage()" aria-label="Close"></button>
+</div>
+<div *ngIf="loggedIn" class="alert alert-success alert-dismissible d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+     Ви успішно увійшли в систему
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

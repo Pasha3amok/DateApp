@@ -1,14 +1,25 @@
-import { APIService } from './services/api.service';
+import { APIService } from './_services/api.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { UsersList } from './models/Interface';
+import {
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import {
+  RouterOutlet,
+  RouterModule,
+} from '@angular/router';
+import { UsersList } from './_models/UsersList';
 import { Observable } from 'rxjs';
+import { NavComponent } from './nav/nav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    NavComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
