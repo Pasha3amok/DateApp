@@ -1,40 +1,52 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LoginResponce, LoginUser } from '../_models/login-user';
+import {
+  LoginResponce,
+  LoginUser,
+} from '../_models/loginUser';
 import { AccountService } from '../_services/account.service';
 import { CommonModule } from '@angular/common';
-import { interval } from 'rxjs';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    BsDropdownModule,
+  ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })
 export class NavComponent {
-  private accService = inject(AccountService);
-  loggedIn:boolean = false;
+  accService = inject(AccountService);
   loginModel: LoginUser = new LoginUser();
-  errorMessage: string = '';
-
+  errorMessage = signal<string>('');
+  currentUser = localStorage.getItem('user');
 
   login() {
-    this.accService.login(this.loginModel).subscribe({
-        next:(res:LoginResponce) => {
-          console.log(res)
-          this.loggedIn = true;
-          this.errorMessage = '';
+    this.accService
+      .login(this.loginModel)
+      .subscribe({
+        error: (error) => {
+          this.errorMessage.set('');
+          this.errorMessage.set(
+            error.error.message
+          );
         },
-        error: error => {
-          this.errorMessage = '';
-          this.errorMessage = error.error.message;
-          },
-
       });
   }
+  logout() {
+    this.accService.logout();
+    this.loginModel = new LoginUser();
+  }
 
-  clearErrorMessage(){
-    this.errorMessage = '';
+  clearErrorMessage() {
+    this.errorMessage.set('');
   }
 }
