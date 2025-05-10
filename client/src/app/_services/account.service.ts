@@ -6,10 +6,10 @@ import {
 } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
-  LoginResponce,
-  LoginUser,
-} from '../_models/loginUser';
-import { RegisterUser } from '../_models/RegisterUser';
+    LoginResponce,
+    LoginUser,
+} from '../_models/login-user';
+import { RegisterUser } from '../_models/register-user';
 
 @Injectable({
     providedIn: 'root',

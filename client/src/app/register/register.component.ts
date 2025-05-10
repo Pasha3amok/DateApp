@@ -5,9 +5,9 @@ import {
     output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RegisterUser } from '../_models/RegisterUser';
+import { RegisterUser } from '../_models/register-user';
 import { AccountService } from '../_services/account.service';
-import { UsersList } from '../_models/UsersList';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -18,6 +18,7 @@ import { UsersList } from '../_models/UsersList';
 })
 export class RegisterComponent {
     accService = inject(AccountService);
+    private toastr = inject(ToastrService);
     cancelRegister = output<boolean>();
     regModel: RegisterUser = new RegisterUser();
 
@@ -25,8 +26,16 @@ export class RegisterComponent {
         this.accService
             .register(this.regModel)
             .subscribe({
-                next: () => this.cancel(),
-                error: (error) => alert(error),
+                next: () => {
+                    this.cancel(),
+                        this.toastr.success(
+                            'You successfully sign up!'
+                        );
+                },
+                error: (error) =>
+                    this.toastr.error(
+                        error.error
+                    ),
             });
     }
 

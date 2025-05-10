@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RegisterComponent } from "../register/register.component";
-import { UsersList } from '../_models/UsersList';
+import { UsersList } from '../_models/user-list';
 import { HttpClient } from '@angular/common/http';
 import { APIService } from '../_services/api.service';
 

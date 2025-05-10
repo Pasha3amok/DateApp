@@ -4,7 +4,7 @@ import {
   Injectable,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UsersList } from '../_models/UsersList';
+import { UsersList } from '../_models/user-list';
 
 @Injectable({
   providedIn: 'root',
