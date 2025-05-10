@@ -12,42 +12,59 @@ import {
 import { RegisterUser } from '../_models/RegisterUser';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AccountService {
-  private http = inject(HttpClient);
-  baseUrl = 'https://localhost:5001/api/';
-  currentUser = signal<LoginResponce | null>(
-    null
-  );
+    private http = inject(HttpClient);
+    baseUrl = 'https://localhost:5001/api/';
+    currentUser = signal<
+        LoginResponce | RegisterUser | null
+    >(null);
 
-  login(
-    obj: LoginUser
-  ): Observable<LoginResponce> {
-    const url = `${this.baseUrl}account/login`;
-    return this.http
-      .post<LoginResponce>(url, obj)
-      .pipe(
-        map((user) => {
-          if (user) {
-            localStorage.setItem(
-              'user',
-              JSON.stringify(user)
+    login(
+        obj: LoginUser
+    ): Observable<LoginResponce> {
+        const url = `${this.baseUrl}account/login`;
+        return this.http
+            .post<LoginResponce>(url, obj)
+            .pipe(
+                map((user) => {
+                    if (user) {
+                        localStorage.setItem(
+                            'user',
+                            JSON.stringify(user)
+                        );
+                        this.currentUser.set(
+                            user
+                        );
+                    }
+                    return user;
+                })
             );
-            this.currentUser.set(user);
-          }
-          return user;
-        })
-      );
-  }
-  register(
-    obj: RegisterUser
-  ): Observable<RegisterUser> {
-    const url = `${this.baseUrl}account/register`;
-    return this.http.post<RegisterUser>(url, obj);
-  }
-  logout() {
-    localStorage.removeItem('user');
-    this.currentUser.set(null);
-  }
+    }
+    register(
+        obj: RegisterUser
+    ): Observable<RegisterUser> {
+        const url = `${this.baseUrl}account/register`;
+        return this.http
+            .post<RegisterUser>(url, obj)
+            .pipe(
+                map((user) => {
+                    if (user) {
+                        localStorage.setItem(
+                            'user',
+                            JSON.stringify(user)
+                        );
+                        this.currentUser.set(
+                            user
+                        );
+                    }
+                    return user;
+                })
+            );
+    }
+    logout() {
+        localStorage.removeItem('user');
+        this.currentUser.set(null);
+    }
 }

@@ -18,16 +18,19 @@ import { UsersList } from '../_models/UsersList';
 })
 export class RegisterComponent {
     accService = inject(AccountService);
-    usersFromHomeComponent =
-        input.required<UsersList[]>();
-    cancelRegister = output<UsersList[]>();
+    cancelRegister = output<boolean>();
     regModel: RegisterUser = new RegisterUser();
 
     register() {
         this.accService
             .register(this.regModel)
-            .subscribe();
+            .subscribe({
+                next: () => this.cancel(),
+                error: (error) => alert(error),
+            });
     }
 
-    cancel() {}
+    cancel() {
+        this.cancelRegister.emit(false);
+    }
 }
