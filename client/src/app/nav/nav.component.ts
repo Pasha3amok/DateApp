@@ -22,6 +22,7 @@ import {
     RouterLinkActive,
 } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DarkModeService } from '../_services/dark-mode.service';
 @Component({
     selector: 'app-nav',
     standalone: true,
@@ -40,6 +41,7 @@ export class NavComponent {
     accService = inject(AccountService);
     private router = inject(Router);
     private toastr = inject(ToastrService);
+    darkModeService = inject(DarkModeService);
     loginModel: LoginUser = new LoginUser();
     currentUser = localStorage.getItem('user');
 
@@ -66,5 +68,9 @@ export class NavComponent {
         this.accService.logout();
         this.loginModel = new LoginUser();
         this.router.navigateByUrl('/');
+    }
+
+    toggleDarkMode() {
+        this.darkModeService.updateDarkMode();
     }
 }

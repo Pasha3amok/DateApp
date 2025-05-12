@@ -1,3 +1,4 @@
+import { DarkModeService } from './_services/dark-mode.service';
 import {
     Component,
     inject,
@@ -16,6 +17,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
     private accService = inject(AccountService);
+    darkModeService = inject(DarkModeService);
 
     ngOnInit(): void {
         this.setCurrentUser();
