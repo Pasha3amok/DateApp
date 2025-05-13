@@ -158,3 +158,5 @@ E:\MyProject\DateApp\API\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 E:\MyProject\DateApp\API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\MyProject\DateApp\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
 E:\MyProject\DateApp\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\MyProject\DateApp\api\bin\Debug\net9.0\Data\UserSeedData.json
+E:\MyProject\DateApp\api\bin\Debug\net9.0\AutoMapper.dll
