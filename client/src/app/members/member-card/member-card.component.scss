@@ -1,0 +1,38 @@
+@mixin trans($s){
+    transform: scale($s,$s);
+    transition-duration: 1000ms;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+}
+.card{
+  :hover img{
+    @include trans(1.3);
+  }
+
+  img{
+    @include trans(1.0);
+  }
+
+  &-img-wrapper{
+    overflow: hidden;
+    position: relative;
+
+    &:hover .member-icons{
+      bottom: 0;
+      opacity: 1;
+    }
+  }
+}
+.member-icons{
+  position: absolute;
+  bottom: -20%;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 0;
+}
+
+.animate {
+  transition: all 0.3s ease-in-out;
+}

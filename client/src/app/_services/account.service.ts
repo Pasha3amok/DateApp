@@ -10,13 +10,14 @@ import {
     LoginUser,
 } from '../_models/login-user';
 import { RegisterUser } from '../_models/register-user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AccountService {
     private http = inject(HttpClient);
-    baseUrl = 'https://localhost:5001/api/';
+    baseUrl = environment.apiUrl;
     currentUser = signal<
         LoginResponce | RegisterUser | null
     >(null);
