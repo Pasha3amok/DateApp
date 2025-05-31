@@ -1,24 +1,37 @@
 import { effect, Injectable, signal } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class DarkModeService {
-  darkMode = signal<string>(
-    JSON.parse(localStorage.getItem('theme') ?? 'light')
-  );
+    darkMode = signal<string>(
+        JSON.parse(
+            localStorage.getItem('theme') ??
+                '"light"'
+        )
+    );
 
-  updateDarkMode(){
-    this.darkMode.update(value => (value === "dark" ? "light" : "dark"))
-  }
+    updateDarkMode() {
+        this.darkMode.update((value) =>
+            value === 'dark' ? 'light' : 'dark'
+        );
+    }
 
-  constructor() {
-    effect(() =>{
-      localStorage.setItem('theme',JSON.stringify(this.darkMode()));
-      document.documentElement.setAttribute('data-bs-theme', this.darkMode());
-    });
+    constructor() {
+        effect(() => {
+            localStorage.setItem(
+                'theme',
+                JSON.stringify(this.darkMode())
+            );
+            document.documentElement.setAttribute(
+                'data-bs-theme',
+                this.darkMode()
+            );
+        });
 
-    document.documentElement.setAttribute('data-bs-theme', this.darkMode());
-
-   }
+        document.documentElement.setAttribute(
+            'data-bs-theme',
+            this.darkMode()
+        );
+    }
 }
