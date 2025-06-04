@@ -1,21 +1,42 @@
 import { Member } from './../_models/member';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import {
+    inject,
+    Injectable,
+    signal,
+} from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class MembersService {
-  private http = inject(HttpClient);
-  baseUrl = environment.apiUrl
+    private http = inject(HttpClient);
+    baseUrl = environment.apiUrl;
+    members = signal<Member[]>([]);
 
-  getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(`${this.baseUrl}users`);
-  }
+    getMembers() {
+        return this.http
+            .get<Member[]>(`${this.baseUrl}users`)
+            .subscribe({
+                next: (members) =>
+                    this.members.set(members),
+            });
+    }
 
-  getMember(username:string): Observable<Member> {
-    return this.http.get<Member>(`${this.baseUrl}users/${username}`)
-  }
+    getMember(
+        username: string
+    ): Observable<Member> {
+        return this.http.get<Member>(
+            `${this.baseUrl}users/${username}`
+        );
+    }
+
+    updateMember(member: Member) {
+        return this.http.put(
+            `${this.baseUrl}users`,
+            member
+        );
+    }
 }

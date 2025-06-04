@@ -7,13 +7,18 @@ import {
 import { NavComponent } from './nav/nav.component';
 import { AccountService } from './_services/account.service';
 import { RouterOutlet } from '@angular/router';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, NavComponent],
+    imports: [
+        RouterOutlet,
+        NavComponent,
+        NgxSpinnerComponent,
+    ],
 })
 export class AppComponent implements OnInit {
     private accService = inject(AccountService);

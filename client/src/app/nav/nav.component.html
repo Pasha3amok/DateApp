@@ -1,6 +1,6 @@
 
 <nav
-  class="navbar navbar-expand-lg bg-primary border-bottom border-info-subtle"
+  class="navbar navbar-expand-lg sticky-top bg-primary border-bottom border-info-subtle"
   data-bs-theme="dark"
 >
   <div class="container">
@@ -56,7 +56,7 @@
           class="username text-dark">{{accService.currentUser()?.username | titlecase}}</span></a>
         <ul *dropdownMenu class="dropdown-menu">
           <li class="dropdown-item">
-            <a class="text-light">Edit profile</a>
+            <a routerLink="/member/edit" class="text-light">Edit profile</a>
           </li>
           <div class="dropdown-divider"></div>
           <li class="dropdown-item">
